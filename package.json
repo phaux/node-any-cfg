@@ -1,0 +1,35 @@
+{
+  "name": "any-cfg",
+  "version": "0.0.0",
+  "author": "phaux <phaux4@gmail.com>",
+  "description": "Config loader",
+  "repository": "phaux/node-any-cfg",
+  "license": "ISC",
+  "keywords": [
+    "config",
+    "loader"
+  ],
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "babel src -d lib",
+    "lint": "eslint index.js",
+    "typeck": "flow src/index.js",
+    "test": "babel-node test/index.js",
+    "prepublish": "npm run lint && npm run typeck && npm run test && npm run build",
+    "watch": "nodemon -w src -w test -x \"npm run lint && npm run typeck && npm run test\""
+  },
+  "dependencies": {
+    "flow-runtime": "^0.13.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-flow-runtime": "^0.11.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "babel-plugin-transform-flow-comments": "^6.22.0",
+    "eslint": "^4.2.0",
+    "eslint-plugin-flowtype": "^2.35.0",
+    "flow-bin": "^0.50.0",
+    "nodemon": "^1.11.0"
+  }
+}
