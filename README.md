@@ -18,7 +18,7 @@ const {HOST, PORT, DEBUG} = loadConfig({
   envPrefix: 'APP',
   vars: { // specify types and defaults
     HOST: {type: 'string', value: '0.0.0.0'},
-    PORT: {type: 'number', value: 80},
+    PORT: {type: 'number', required: true},
     DEBUG: {type: 'boolean', value: false},
   }
 })

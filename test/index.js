@@ -49,4 +49,15 @@ assert.throws(() => {
   })
 })
 
+assert.throws(() => {
+  loadConfig({
+    vars: {
+      TEST: {type: 'boolean', required: true},
+    },
+    mockEnv: {
+      TEST: 'truee',
+    },
+  })
+})
+
 console.log('Tests passed successfully 🎉')

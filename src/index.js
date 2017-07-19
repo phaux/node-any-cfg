@@ -1,13 +1,14 @@
 // @flow
 
-const FALSY_VALS: string[] = ['', '0', 'false']
+const TRUTHY_VALS: string[] = ['1', 'true']
+const FALSY_VALS:  string[] = ['', '0', 'false']
 
 type Options = {|
   vars: {
     [string]:
       | {|required?: false, type: 'string', value: string|}
       | {|required?: false, type: 'number', value: number|}
-      | {|required?: false, type: 'boolean', value: boolean|}
+      | {|required?: false, type: 'boolean', value?: boolean|}
       | {|required: true, type: 'string' | 'number' | 'boolean'|}
   },
   mockEnv?: {[string]: string},
@@ -32,14 +33,24 @@ export default function loadConfig(opts: Options): Result {
       if (value === undefined || value === null) {
 
         if (opt.required) throw new Error(
-          `The environment variable ${name} must be set!`
+          `The environment variable ${key} must be set!`
         )
-        else return [key, opt.value]
+
+        if (opt.value !== undefined) return [key, opt.value]
+        else return [key, false]
 
       }
 
-      if (opt.type == 'number') return [key, parseFloat(value)]
-      else if (opt.type == 'boolean') return [key, !FALSY_VALS.includes(value)]
+      if (opt.type == 'boolean') {
+        if (TRUTHY_VALS.includes(value)) return [key, true]
+        if (FALSY_VALS.includes(value))  return [key, false]
+        throw new Error(
+          `The value of the environment variable ${key} must be one of: `
+          + [...TRUTHY_VALS, ...FALSY_VALS]
+            .map(s => JSON.stringify(s)).join(', ')
+        )
+      }
+      else if (opt.type == 'number') return [key, parseFloat(value)]
       else return [key, value]
 
     })
