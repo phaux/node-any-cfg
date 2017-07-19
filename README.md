@@ -1,5 +1,7 @@
 # any-cfg
 
+[![Build Status](https://travis-ci.org/phaux/node-any-cfg.svg?branch=master)](https://travis-ci.org/phaux/node-any-cfg)
+
 Load configs from environment variables.
 
 ## Example
