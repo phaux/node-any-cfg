@@ -49,4 +49,4 @@ assert.throws(() => {
   })
 })
 
-console.log('All tests passed successfully!')
+console.log('Tests passed successfully 🎉')

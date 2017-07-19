@@ -11,12 +11,22 @@
   ],
   "main": "lib/index.js",
   "scripts": {
+    "test": "run-p -l test:*",
+    "test:lint": "eslint src test --color && echo All good 👌",
+    "test:flow": "flow --quiet --color=always",
+    "test:unit": "babel-node test/index.js",
     "build": "babel src -d lib",
-    "lint": "eslint index.js",
-    "typeck": "flow src/index.js",
-    "test": "babel-node test/index.js",
-    "prepublish": "npm run lint && npm run typeck && npm run test && npm run build",
-    "watch": "nodemon -w src -w test -x \"npm run lint && npm run typeck && npm run test\""
+    "prepublish": "run-s test build",
+    "watch": "npm-watch"
+  },
+  "watch": {
+    "test": {
+      "patterns": [
+        "src",
+        "test"
+      ],
+      "quiet": true
+    }
   },
   "dependencies": {
     "flow-runtime": "^0.13.0"
@@ -30,6 +40,7 @@
     "eslint": "^4.2.0",
     "eslint-plugin-flowtype": "^2.35.0",
     "flow-bin": "^0.50.0",
-    "nodemon": "^1.11.0"
+    "npm-run-all": "^4.0.2",
+    "npm-watch": "^0.2.0"
   }
 }
