@@ -15,8 +15,9 @@
     "test:lint": "eslint src test --color && echo All good 👌",
     "test:flow": "flow --quiet --color=always",
     "test:unit": "babel-node test/index.js",
-    "build": "babel src -d lib",
-    "prepublish": "run-s test build",
+    "build": "run-s -l build:*",
+    "build:babel": "babel src -d lib",
+    "prepublish": "npm run -s build",
     "watch": "npm-watch"
   },
   "watch": {
