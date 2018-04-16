@@ -1,10 +1,9 @@
 declare type Options = {
   vars: {
-    [varName: string]:
-      | {required?: false, type: 'string', value: string}
-      | {required?: false, type: 'number', value: number}
-      | {required?: false, type: 'boolean', value?: boolean}
-      | {required: true, type: 'string' | 'number' | 'boolean'}
+    [varName: string]: {
+      type: 'string' | 'number' | 'boolean',
+      required?: boolean,
+    },
   },
   _mockEnv?: {[varName: string]: string},
   envPrefix?: string,
