@@ -32,5 +32,6 @@ assert.equal(DEBUG, true)
 
 ## TODOs
 
+- [x] Load config from env vars
 - [ ] Load config from command line
 - [ ] Load config from files

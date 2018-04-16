@@ -1,7 +1,5 @@
-// @flow
-
-import loadConfig from '../src/index.js'
-import assert from 'assert'
+const {loadConfig} = require('../index.js')
+const assert = require('assert')
 
 assert.deepEqual(
   loadConfig({
@@ -11,7 +9,7 @@ assert.deepEqual(
       BOOL: {type: 'boolean', value: false},
     },
     envPrefix: 'TEST',
-    mockEnv: {
+    _mockEnv: {
       TEST_STR: 'foobar',
       TEST_NUM: '42',
       TEST_BOOL: 'true',
@@ -31,7 +29,7 @@ assert.deepEqual(
       NUM: {type: 'number', value: 1},
       BOOL: {type: 'boolean', value: false},
     },
-    mockEnv: {},
+    _mockEnv: {},
   }),
   {
     STR: 'foo',
@@ -45,7 +43,7 @@ assert.throws(() => {
     vars: {
       TEST: {type: 'boolean', required: true},
     },
-    mockEnv: {},
+    _mockEnv: {},
   })
 })
 
@@ -54,7 +52,7 @@ assert.throws(() => {
     vars: {
       TEST: {type: 'boolean', required: true},
     },
-    mockEnv: {
+    _mockEnv: {
       TEST: 'truee',
     },
   })

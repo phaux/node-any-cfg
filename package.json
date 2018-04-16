@@ -9,39 +9,12 @@
     "config",
     "loader"
   ],
-  "main": "lib/index.js",
   "scripts": {
-    "test": "run-p -l test:*",
-    "test:lint": "eslint src test --color && echo All good 👌",
-    "test:flow": "flow --quiet --color=always",
-    "test:unit": "babel-node test/index.js",
-    "build": "run-s -l build:*",
-    "build:babel": "babel src -d lib",
-    "prepublish": "npm run -s build",
-    "watch": "npm-watch"
-  },
-  "watch": {
-    "test": {
-      "patterns": [
-        "src",
-        "test"
-      ],
-      "quiet": true
-    }
-  },
-  "dependencies": {
-    "flow-runtime": "^0.13.0"
+    "test": "eslint . && tsc -p . && node test"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-eslint": "^7.2.3",
-    "babel-plugin-flow-runtime": "^0.11.1",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
-    "babel-plugin-transform-flow-comments": "^6.22.0",
-    "eslint": "^4.2.0",
-    "eslint-plugin-flowtype": "^2.35.0",
-    "flow-bin": "^0.50.0",
-    "npm-run-all": "^4.0.2",
-    "npm-watch": "^0.2.0"
+    "@types/node": "^9.6.4",
+    "eslint": "^4.19.1",
+    "typescript": "^2.8.1"
   }
 }
