@@ -12,20 +12,20 @@ export APP_DEBUG="true"
 ```
 
 ```js
-const loadConfig = require('any-cfg')
+const {loadConfig} = require('any-cfg')
 
 const {HOST, PORT, DEBUG} = loadConfig({
   envPrefix: 'APP',
   vars: { // specify types and defaults
-    HOST: {type: 'string', value: '0.0.0.0'},
+    HOST: {type: 'string'},
     PORT: {type: 'number', required: true},
-    DEBUG: {type: 'boolean', value: false},
+    DEBUG: {type: 'boolean'},
   }
 })
 
 const assert = require('assert')
 
-assert.equal(HOST, '0.0.0.0')
+assert.equal(HOST, undefined)
 assert.equal(PORT, 3000)
 assert.equal(DEBUG, true)
 ```
