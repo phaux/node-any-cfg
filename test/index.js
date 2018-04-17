@@ -42,6 +42,33 @@ assert.deepEqual(
   }
 )
 
+console.log('Uses fallback values')
+assert.deepEqual(
+  loadConfig({
+    vars: {
+      STR: {type: 'string', fallback: 'foo'},
+      NUM: {type: 'number', fallback: 123},
+      BOOL: {type: 'boolean', fallback: true},
+    },
+    _mockEnv: {},
+  }),
+  {
+    STR: 'foo',
+    NUM: 123,
+    BOOL: true,
+  }
+)
+
+console.log('Throws on wrong type of fallback value')
+assert.throws(() => {
+  loadConfig({
+    vars: {
+      TEST: {type: 'number', fallback: '123'},
+    },
+    _mockEnv: {},
+  })
+})
+
 console.log('Throws when no required boolean env var set')
 assert.throws(() => {
   loadConfig({

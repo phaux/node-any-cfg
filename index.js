@@ -5,16 +5,22 @@ const FALSY_VALS = ['', '0', 'off', 'false']
 
 /**
  * @param {Options} opts
- * @return {Result}
+ * @return {Results}
  */
 module.exports.loadConfig = opts => {
 
-  /** @type {Result} */
+  /** @type {Results} */
   const results = {}
 
   const env = opts._mockEnv || process.env
 
   for (const [optName, opt] of Object.entries(opts.vars)) {
+
+    if (opt.fallback != null && typeof opt.fallback != opt.type) throw new Error(
+      `The option ${optName} of type ${opt.type} uses wrong fallback value of type `
+      + typeof opt.fallback
+    )
+
     const envName = `${opts.envPrefix || ''}${optName}`
       .toUpperCase().replace(/[^A-Z0-9_]/gi, '_')
     const value = env[envName]
@@ -23,6 +29,7 @@ module.exports.loadConfig = opts => {
       if (opt.required) throw new Error(
         `The environment variable ${envName} must be set!`
       )
+      if (opt.fallback != null) results[optName] = opt.fallback
     }
     else if (opt.type == 'boolean') {
       if (TRUTHY_VALS.includes(value.toLowerCase())) results[optName] = true

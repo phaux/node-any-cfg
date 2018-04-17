@@ -17,7 +17,6 @@
     "comma-dangle": ["error", "always-multiline"],
     "comma-spacing": "error",
     "comma-style": "error",
-    "complexity": ["warn", 15],
     "computed-property-spacing": "error",
     "dot-location": ["error", "property"],
     "dot-notation": "error",

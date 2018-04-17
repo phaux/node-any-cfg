@@ -3,12 +3,13 @@ declare type Options = {
     [varName: string]: {
       type: 'string' | 'number' | 'boolean',
       required?: boolean,
+      fallback?: string | number | boolean,
     },
   },
   _mockEnv?: {[varName: string]: string},
   envPrefix?: string,
 }
 
-declare type Result = {
+declare type Results = {
   [varName: string]: string | number | boolean,
 }
