@@ -1,4 +1,4 @@
-const {loadConfig} = require('../index.js')
+const {loadConfig} = require('../lib/index.js')
 const assert = require('assert')
 
 console.log('Loads config from env vars')

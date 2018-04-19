@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "declaration": true,
+    "allowJs": true,
+    "checkJs": true,
     "lib": ["esnext"],
-    "pretty": true,
-    "sourceMap": true,
+    "noEmit": true,
     "strict": true
   },
   "include": [
-    "src/**/*"
+    "test/**/*"
   ]
 }

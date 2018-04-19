@@ -39,7 +39,6 @@
     "no-multiple-empty-lines": "error",
     "no-restricted-syntax": [
       "error",
-      "SwitchStatement",
       "ForStatement",
       "ForInStatement"
     ],

@@ -1,16 +1,26 @@
-/// <reference path="./types.d.ts" />
-
 const TRUTHY_VALS = ['1', 'on', 'true']
 const FALSY_VALS = ['', '0', 'off', 'false']
 
-/**
- * @param {Options} opts
- * @return {Results}
- */
-module.exports.loadConfig = opts => {
+export type Options = {
+  vars: {
+    [varName: string]: {
+      type: 'string' | 'number' | 'boolean',
+      required?: boolean,
+      fallback?: string | number | boolean,
+    },
+  },
+  _mockEnv?: {[varName: string]: string},
+  _mockArgs?: string[],
+  envPrefix?: string,
+}
 
-  /** @type {Results} */
-  const results = {}
+export type Results = {
+  [varName: string]: string | number | boolean,
+}
+
+export function loadConfig(opts: Options): Results {
+
+  const results: Results = {}
 
   const env = opts._mockEnv || process.env
 
@@ -18,7 +28,7 @@ module.exports.loadConfig = opts => {
 
     if (opt.fallback != null && typeof opt.fallback != opt.type) throw new Error(
       `The option ${optName} of type ${opt.type} uses wrong fallback value of type `
-      + typeof opt.fallback
+      + typeof opt.fallback,
     )
 
     const envName = `${opts.envPrefix || ''}${optName}`
@@ -27,7 +37,7 @@ module.exports.loadConfig = opts => {
 
     if (value == null) {
       if (opt.required) throw new Error(
-        `The environment variable ${envName} must be set!`
+        `The environment variable ${envName} must be set!`,
       )
       if (opt.fallback != null) results[optName] = opt.fallback
     }
@@ -37,7 +47,7 @@ module.exports.loadConfig = opts => {
       else throw new Error(
         `The value of the environment variable ${envName} must be one of: `
         + [...TRUTHY_VALS, ...FALSY_VALS]
-          .map(s => JSON.stringify(s)).join(', ')
+          .map(s => JSON.stringify(s)).join(', '),
       )
     }
     else if (opt.type == 'number') {

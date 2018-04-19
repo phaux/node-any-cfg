@@ -9,12 +9,19 @@
     "config",
     "loader"
   ],
+  "main": "lib/index.js",
+  "module": "module/index.js",
   "scripts": {
-    "test": "eslint . && tsc -p . && node test"
+    "prepare": "npm run prepare:module && npm run prepare:lib",
+    "prepare:module": "tsc -p . -m esnext -t esnext --outDir module",
+    "prepare:lib": "tsc -p . -m commonjs -t esnext --outDir lib",
+    "prepublish": "npm test",
+    "test": "tslint -p . && eslint test && tsc -p tsconfig.test.json && node test"
   },
   "devDependencies": {
-    "@types/node": "^9.6.4",
+    "@types/node": "^9.6.6",
     "eslint": "^4.19.1",
+    "tslint": "^5.9.1",
     "typescript": "^2.8.1"
   }
 }

@@ -46,6 +46,7 @@
     "restrict-plus-operands": false,
     "semicolon": [true, "never"],
     "strict-boolean-expressions": false,
+    "strict-type-predicates": false,
     "triple-equals": false,
     "type-literal-delimiter": false,
     "typedef": [true, "call-signature", "parameter", "property-declaration", "member-variable-declaration"],
