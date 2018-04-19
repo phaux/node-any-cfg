@@ -15,8 +15,10 @@
     "prepare": "npm run prepare:module && npm run prepare:lib",
     "prepare:module": "tsc -p . -m esnext -t esnext --outDir module",
     "prepare:lib": "tsc -p . -m commonjs -t esnext --outDir lib",
-    "prepublish": "npm test",
-    "test": "tslint -p . && eslint test && tsc -p tsconfig.test.json && node test"
+    "prepublishOnly": "npm test",
+    "test": "npm run test:lint && npm run test:unit",
+    "test:lint": "tslint -p .",
+    "test:unit": "eslint test && tsc -p tsconfig.test.json && node test"
   },
   "devDependencies": {
     "@types/node": "^9.6.6",
