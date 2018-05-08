@@ -1,106 +1,37 @@
-const {loadConfig} = require('../lib/index.js')
+const {load} = require('../lib/index.js')
 const assert = require('assert')
 
-console.log('Loads config from env vars')
-assert.deepEqual(
-  loadConfig({
-    vars: {
-      STR: {type: 'string'},
-      NUM: {type: 'number'},
-      BOOL: {type: 'boolean'},
-    },
-    _mockEnv: {
-      NUM: '42',
-      BOOL: 'off',
-    },
-  }),
-  {
-    NUM: 42,
-    BOOL: false,
-  }
-)
-
-console.log('Loads config from env with envPrefix')
-assert.deepEqual(
-  loadConfig({
-    vars: {
-      STR: {type: 'string'},
-      NUM: {type: 'number'},
-      BOOL: {type: 'boolean'},
-    },
-    envPrefix: 'TEST_',
-    _mockEnv: {
-      TEST_STR: 'foobar',
-      TEST_NUM: '0.5',
-      TEST_BOOL: 'true',
-    },
-  }),
-  {
-    STR: 'foobar',
-    NUM: 0.5,
-    BOOL: true,
-  }
-)
-
-console.log('Uses fallback values')
-assert.deepEqual(
-  loadConfig({
-    vars: {
-      STR: {type: 'string', fallback: 'foo'},
-      NUM: {type: 'number', fallback: 123},
-      BOOL: {type: 'boolean', fallback: true},
+console.log('Throws on wrong option name format')
+assert.throws(() => {
+  load({
+    options: {
+      testOpt: {type: 'string'},
     },
     _mockEnv: {},
+    _mockArgs: [],
+  })
+})
+
+require('./env.js')
+require('./args.js')
+
+console.log('Arguments overwrite environment')
+assert.deepEqual(
+  load({
+    options: {
+      STR_OPT: {type: 'string'},
+      NUM_OPT: {type: 'number', short: 'n'},
+    },
+    _mockEnv: {STR_OPT: 'a', NUM_OPT: '1'},
+    _mockArgs: ['--num-opt', '2'],
   }),
   {
-    STR: 'foo',
-    NUM: 123,
-    BOOL: true,
-  }
+    rest: [],
+    results: {
+      STR_OPT: 'a',
+      NUM_OPT: '2',
+    },
+  },
 )
-
-console.log('Throws on wrong type of fallback value')
-assert.throws(() => {
-  loadConfig({
-    vars: {
-      TEST: {type: 'number', fallback: '123'},
-    },
-    _mockEnv: {},
-  })
-})
-
-console.log('Throws when no required boolean env var set')
-assert.throws(() => {
-  loadConfig({
-    vars: {
-      TEST: {type: 'boolean', required: true},
-    },
-    _mockEnv: {},
-  })
-})
-
-console.log('Throws on invalid boolean value')
-assert.throws(() => {
-  loadConfig({
-    vars: {
-      TEST: {type: 'boolean'},
-    },
-    _mockEnv: {
-      TEST: 'truee',
-    },
-  })
-})
-
-console.log('Throws on invalid numeric value')
-assert.throws(() => {
-  loadConfig({
-    vars: {
-      TEST: {type: 'number'},
-    },
-    _mockEnv: {
-      TEST: '1234a',
-    },
-  })
-})
 
 console.log('Tests passed successfully 🎉')

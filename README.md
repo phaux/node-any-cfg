@@ -2,36 +2,50 @@
 
 [![Build Status](https://travis-ci.org/phaux/node-any-cfg.svg?branch=master)](https://travis-ci.org/phaux/node-any-cfg)
 
-Load configs from environment variables.
+Read program options from environment variables and command line arguments.
 
 ## Example
 
-```bash
-export APP_PORT="3000"
-export APP_DEBUG="true"
-```
+Given following program:
 
 ```js
-const {loadConfig} = require('any-cfg')
+const {load} = require('any-cfg')
 
-const {HOST, PORT, DEBUG} = loadConfig({
-  envPrefix: 'APP',
-  vars: { // specify types and defaults
-    HOST: {type: 'string'},
-    PORT: {type: 'number', required: true},
+const {
+  results: {
+    HOST = '0.0.0.0',
+    PORT = 80,
+    DEBUG,
+  },
+  rest: [ROOT = '.'],
+} = load({
+  envPrefix: 'APP_',
+  options: {
+    HOST: {type: 'string', short: 'h'},
+    PORT: {type: 'number', short: 'p'},
     DEBUG: {type: 'boolean'},
-  }
+  },
 })
+```
 
-const assert = require('assert')
+Executing it as:
 
-assert.equal(HOST, undefined)
+```bash
+export APP_PORT=3000
+your-app -h localhost /var/www
+```
+
+Would give following results:
+
+```js
+assert.equal(HOST, 'localhost')
 assert.equal(PORT, 3000)
-assert.equal(DEBUG, true)
+assert.equal(DEBUG, undefined)
+assert.equal(ROOT, '/var/www')
 ```
 
 ## TODOs
 
 - [x] Load config from env vars
-- [ ] Load config from command line
-- [ ] Load config from files
+- [x] Load config from command line args
+- [ ] Load config from JSON files

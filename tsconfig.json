@@ -4,7 +4,8 @@
     "lib": ["esnext"],
     "pretty": true,
     "sourceMap": true,
-    "strict": true
+    "strict": true,
+    "target": "esnext"
   },
   "include": [
     "src/**/*"
