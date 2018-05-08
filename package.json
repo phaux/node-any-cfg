@@ -9,8 +9,9 @@
     "config",
     "loader"
   ],
-  "main": "lib/index.js",
-  "module": "module/index.js",
+  "main": "lib",
+  "module": "module",
+  "typings": "module",
   "scripts": {
     "prepare": "npm run prepare:module && npm run prepare:lib",
     "prepare:module": "tsc -p . -m esnext -t esnext --outDir module",
