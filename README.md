@@ -12,12 +12,10 @@ Given following program:
 const {load} = require('any-cfg')
 
 const {
-  results: {
-    HOST = '0.0.0.0',
-    PORT = 80,
-    DEBUG,
-  },
-  rest: [ROOT = '.'],
+  HOST = '0.0.0.0',
+  PORT = 80,
+  DEBUG,
+  _: [ROOT = '.'], // rest arguments from command line
 } = load({
   envPrefix: 'APP_',
   options: {
@@ -26,6 +24,7 @@ const {
     DEBUG: {type: 'boolean'},
   },
 })
+
 ```
 
 Executing it as:
@@ -49,3 +48,4 @@ assert.equal(ROOT, '/var/www')
 - [x] Load config from env vars
 - [x] Load config from command line args
 - [ ] Load config from JSON files
+- [ ] Generate help message

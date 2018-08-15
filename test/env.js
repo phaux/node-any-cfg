@@ -18,12 +18,74 @@ assert.deepEqual(
     _mockArgs: [],
   }),
   {
-    rest: [],
-    results: {
-      NUM: 42,
-      BOOL: false,
-    },
+    _: [],
+    NUM: 42,
+    BOOL: false,
   }
+)
+
+console.log('Loads list option')
+assert.deepEqual(
+  load({
+    options: {
+      FOO: {type: 'list'},
+    },
+    _mockEnv: {
+      FOO: 'foo,bar,42',
+    },
+    _mockArgs: [],
+  }),
+  {
+    _: [],
+    FOO: ['foo', 'bar', '42'],
+  }
+)
+
+console.log('Loads map option')
+assert.deepEqual(
+  load({
+    options: {
+      FOO: {type: 'map'},
+    },
+    _mockEnv: {
+      FOO: 'foo=bar,42=24',
+    },
+    _mockArgs: [],
+  }),
+  {
+    _: [],
+    FOO: {'foo': 'bar', '42': '24'},
+  }
+)
+
+console.log('Allows empty keys and values in map')
+assert.deepEqual(
+  load({
+    options: {
+      FOO: {type: 'map'},
+    },
+    _mockEnv: {
+      FOO: 'a=b,=',
+    },
+    _mockArgs: [],
+  }),
+  {
+    _: [],
+    FOO: {'a': 'b', '': ''},
+  }
+)
+
+console.log('Throws on map key with no value')
+assert.throws(() =>
+  load({
+    options: {
+      FOO: {type: 'map'},
+    },
+    _mockEnv: {
+      FOO: 'a=b,c',
+    },
+    _mockArgs: [],
+  })
 )
 
 console.log('Loads options with envPrefix')
@@ -43,12 +105,10 @@ assert.deepEqual(
     _mockArgs: [],
   }),
   {
-    rest: [],
-    results: {
-      STR: 'foobar',
-      NUM: 0.5,
-      BOOL: true,
-    },
+    _: [],
+    STR: 'foobar',
+    NUM: 0.5,
+    BOOL: true,
   }
 )
 
