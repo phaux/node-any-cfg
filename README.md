@@ -9,14 +9,14 @@ Read program options from environment variables and command line arguments.
 Given following program:
 
 ```js
-const {load} = require('any-cfg')
+const {parse} = require('any-cfg')
 
 const {
   HOST = '0.0.0.0',
   PORT = 80,
   DEBUG,
   _: [ROOT = '.'], // rest arguments from command line
-} = load({
+} = parse({
   envPrefix: 'APP_',
   options: {
     HOST: {type: 'string', short: 'h'},
@@ -47,5 +47,5 @@ assert.equal(ROOT, '/var/www')
 
 - [x] Load config from env vars
 - [x] Load config from command line args
-- [ ] Load config from JSON files
+- [x] Load config from JSON files
 - [ ] Generate help message

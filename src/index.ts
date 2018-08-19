@@ -1,5 +1,6 @@
 import { parseArguments } from "./args"
 import { Config, Options, Rest, Result, Results } from "./common"
+import { parseConfig } from "./config"
 import { parseEnvironment } from "./env"
 
 /** Parse options from config files, environment variables and command line arguments */
@@ -10,6 +11,7 @@ export function parse<O extends Options>(cfg: Config<O>): Results<O> & Rest {
   }
 
   const results: {[option: string]: Result} = {
+    ...parseConfig(cfg) as {},
     ...parseEnvironment(cfg) as {},
     ...parseArguments(cfg) as {},
   }

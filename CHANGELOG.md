@@ -16,3 +16,4 @@
 
 - better docs
 - changed main function name to `parse` **(breaking change 💔)**
+- support for TOML and JSON config files
