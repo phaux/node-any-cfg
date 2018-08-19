@@ -1,9 +1,10 @@
-const {load} = require('../lib/index.js')
+// <referance path="./types.d.ts" />
+const {parse} = require('../lib/index.js')
 const assert = require('assert')
 
 console.log('Throws on wrong option name format')
 assert.throws(() => {
-  load({
+  parse({
     options: {
       testOpt: {type: 'string'},
     },
@@ -14,7 +15,7 @@ assert.throws(() => {
 
 console.log('Throws on missing required option')
 assert.throws(() => {
-  load({
+  parse({
     options: {
       TEST: {type: 'list', required: true},
     },
@@ -25,7 +26,7 @@ assert.throws(() => {
 
 console.log('Unset optional list should result in empty array')
 assert.deepEqual(
-  load({
+  parse({
     options: {
       TEST: {type: 'list'},
     },
@@ -40,7 +41,7 @@ assert.deepEqual(
 
 console.log('Unset optional map should result in empty object')
 assert.deepEqual(
-  load({
+  parse({
     options: {
       TEST: {type: 'map'},
     },
@@ -59,7 +60,7 @@ require('./args.js')
 
 console.log('Arguments overwrite environment')
 assert.deepEqual(
-  load({
+  parse({
     options: {
       STR_OPT: {type: 'string'},
       NUM_OPT: {type: 'number', short: 'n'},

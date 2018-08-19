@@ -1,11 +1,11 @@
-const {load} = require('../lib/index.js')
+const {parse} = require('../lib/index.js')
 const assert = require('assert')
 
 console.log('# Testing loading from evironment variables')
 
 console.log('Loads options')
 assert.deepEqual(
-  load({
+  parse({
     options: {
       STR: {type: 'string'},
       NUM: {type: 'number'},
@@ -26,7 +26,7 @@ assert.deepEqual(
 
 console.log('Loads list option')
 assert.deepEqual(
-  load({
+  parse({
     options: {
       FOO: {type: 'list'},
     },
@@ -43,7 +43,7 @@ assert.deepEqual(
 
 console.log('Loads map option')
 assert.deepEqual(
-  load({
+  parse({
     options: {
       FOO: {type: 'map'},
     },
@@ -60,7 +60,7 @@ assert.deepEqual(
 
 console.log('Allows empty keys and values in map')
 assert.deepEqual(
-  load({
+  parse({
     options: {
       FOO: {type: 'map'},
     },
@@ -77,7 +77,7 @@ assert.deepEqual(
 
 console.log('Throws on map key with no value')
 assert.throws(() =>
-  load({
+  parse({
     options: {
       FOO: {type: 'map'},
     },
@@ -90,7 +90,7 @@ assert.throws(() =>
 
 console.log('Loads options with envPrefix')
 assert.deepEqual(
-  load({
+  parse({
     envPrefix: 'TEST_',
     options: {
       STR: {type: 'string'},
@@ -114,7 +114,7 @@ assert.deepEqual(
 
 console.log('Throws on invalid boolean value')
 assert.throws(() => {
-  load({
+  parse({
     options: {
       TEST: {type: 'boolean'},
     },
@@ -127,7 +127,7 @@ assert.throws(() => {
 
 console.log('Throws on invalid numeric value')
 assert.throws(() => {
-  load({
+  parse({
     options: {
       TEST: {type: 'number'},
     },

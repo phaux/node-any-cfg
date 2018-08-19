@@ -2,8 +2,9 @@
   "compilerOptions": {
     "declaration": true,
     "lib": ["esnext"],
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "pretty": true,
-    "sourceMap": true,
     "strict": true,
     "target": "esnext"
   },

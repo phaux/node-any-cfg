@@ -1,11 +1,11 @@
-const {load} = require('../lib/index.js')
+const {parse} = require('../lib/index.js')
 const assert = require('assert')
 
 console.log('# Testing loading from command line arguments')
 
 console.log('Loads options')
 assert.deepEqual(
-  load({
+  parse({
     options: {
       STR_OPT: {type: 'string'},
       NUM_OPT: {type: 'number'},
@@ -23,7 +23,7 @@ assert.deepEqual(
 
 console.log('Loads rest options')
 assert.deepEqual(
-  load({
+  parse({
     options: {
       TEST: {type: 'number'},
     },
@@ -38,7 +38,7 @@ assert.deepEqual(
 
 console.log('Loads list option')
 assert.deepEqual(
-  load({
+  parse({
     options: {
       FOO: {type: 'list'},
     },
@@ -52,7 +52,7 @@ assert.deepEqual(
 
 console.log('Loads map option')
 assert.deepEqual(
-  load({
+  parse({
     options: {
       FOO: {type: 'map'},
     },
@@ -67,7 +67,7 @@ assert.deepEqual(
 
 console.log('Allows empty keys and values in map')
 assert.deepEqual(
-  load({
+  parse({
     options: {
       FOO: {type: 'map'},
     },
@@ -82,7 +82,7 @@ assert.deepEqual(
 
 console.log('Throws on map key with no value')
 assert.throws(() =>
-  load({
+  parse({
     options: {
       FOO: {type: 'map'},
     },
@@ -93,7 +93,7 @@ assert.throws(() =>
 
 console.log('Loads boolean options')
 assert.deepEqual(
-  load({
+  parse({
     options: {
       OPT_A: {type: 'boolean'},
       OPT_B: {type: 'boolean'},
@@ -111,7 +111,7 @@ assert.deepEqual(
 
 console.log('Long negated boolean arg takes precedence')
 assert.deepEqual(
-  load({
+  parse({
     options: {
       FOO: {type: 'boolean'},
       NO_FOO: {type: 'string'},
@@ -127,7 +127,7 @@ assert.deepEqual(
 
 console.log('Loads short options')
 assert.deepEqual(
-  load({
+  parse({
     options: {
       BOOL_OPT: {type: 'boolean', short: 'b'},
       NUM_OPT: {type: 'number', short: 'n'},
@@ -144,7 +144,7 @@ assert.deepEqual(
 
 console.log('Throws on valueless short option')
 assert.throws(() =>
-  load({
+  parse({
     options: {
       BOOL_OPT: {type: 'boolean', short: 'b'},
       NUM_OPT: {type: 'number', short: 'n'},
@@ -156,7 +156,7 @@ assert.throws(() =>
 
 console.log('Throws on unknown arg')
 assert.throws(() => {
-  load({
+  parse({
     options: {
       TEST: {type: 'number'},
     },
@@ -167,7 +167,7 @@ assert.throws(() => {
 
 console.log('Throws on missing arg value')
 assert.throws(() => {
-  load({
+  parse({
     options: {
       TEST: {type: 'number'},
     },
@@ -178,7 +178,7 @@ assert.throws(() => {
 
 console.log('Throws on invalid numeric value')
 assert.throws(() => {
-  load({
+  parse({
     options: {
       TEST: {type: 'number'},
     },
