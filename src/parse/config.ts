@@ -2,8 +2,8 @@ import * as fs from 'fs'
 import * as p from 'path'
 // tslint:disable-next-line: no-var-requires no-require-imports
 const TOML = require('toml')
-import { Result, unreachable } from './common'
-import { Config, Options, Results, TypeMap } from './index'
+import { Result, unreachable } from '../common'
+import { Config, Options, Results, TypeMap } from '../index'
 
 type JSONValue = null | string | number | boolean | unknown[] | {[key: string]: unknown}
 

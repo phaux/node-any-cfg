@@ -1,9 +1,13 @@
-import { parseArguments } from "./args"
 import { Config, Options, Rest, Result, Results } from "./common"
-import { parseConfig } from "./config"
-import { parseEnvironment } from "./env"
+import { parseArguments } from "./parse/args"
+import { parseConfig } from "./parse/config"
+import { parseEnvironment } from "./parse/env"
 
-/** Parse options from config files, environment variables and command line arguments */
+/**
+ * Parse options from config files, environment variables and command line arguments
+ * @param cfg The options object
+ * @return Parsed options as key-value map + rest arguments from command line as special `_` option
+ */
 export function parse<O extends Options>(cfg: Config<O>): Results<O> & Rest {
 
   for (const optName of Object.keys(cfg.options)) {

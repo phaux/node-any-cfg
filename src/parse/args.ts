@@ -1,4 +1,4 @@
-import { Config, Options, parseValue, Rest, Result, Results, TypeMap, unreachable } from "./common"
+import { Config, Options, parseValue, Rest, Result, Results, TypeMap, unreachable } from "../common"
 
 function parseArg(
   value: Result | undefined,

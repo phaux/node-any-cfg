@@ -1,9 +1,9 @@
 export interface Config<O extends Options> {
-  /** This prefix is added to every environment variable option */
+  /** Options which are supposed to be parsed from environment variables will have this prefix */
   envPrefix?: string
   /** directory from which to start search for config file. default: `.` */
   configDir?: string
-  /** File name of the config file without extension */
+  /** File name of the config file without extension. Default: don't look for the config */
   configFile?: string
   /** Option definitions */
   options: O

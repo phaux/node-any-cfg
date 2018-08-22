@@ -2,46 +2,52 @@
 
 [![Build Status](https://travis-ci.org/phaux/node-any-cfg.svg?branch=master)](https://travis-ci.org/phaux/node-any-cfg)
 
-Read program options from environment variables and command line arguments.
+[CHANGELOG](CHANGELOG.md)
 
-## Example
+Read program options from config files, environment variables and command line arguments.
 
-Given following program:
+## Usage
 
 ```js
 const {parse} = require('any-cfg')
 
-const {
-  HOST = '0.0.0.0',
-  PORT = 80,
-  DEBUG,
-  _: [ROOT = '.'], // rest arguments from command line
-} = parse({
-  envPrefix: 'APP_',
+const options = parse({
+  configDir: '.',
+  configFile: '.myapprc'
+  envPrefix: 'MYAPP_',
   options: {
     HOST: {type: 'string', short: 'h'},
-    PORT: {type: 'number', short: 'p'},
+    PORT: {type: 'number', short: 'p', required: true},
     DEBUG: {type: 'boolean'},
   },
 })
-
 ```
 
-Executing it as:
+## Detailed usage
 
-```bash
-export APP_PORT=3000
-your-app -h localhost /var/www
-```
+Specify options using format `FOO_BAR` (upper snake case).
+Each option can have type, required flag and short name.
+Supported types are: **string**, **number**, **boolean**,
+**list** (array of strings) and **map** (object of strings).
 
-Would give following results:
+First, options will be read from config files starting from `configDir` and going upwards.
+First file with basename `configFile` will be parsed.
+It must include an extension (either `.json` or [`.toml`](https://github.com/toml-lang/toml)).
+Parser expects options to be formatted as `foo_bar` (lower snake case).
 
-```js
-assert.equal(HOST, 'localhost')
-assert.equal(PORT, 3000)
-assert.equal(DEBUG, undefined)
-assert.equal(ROOT, '/var/www')
-```
+Then, options can be overwritten by environment variables.
+Upper snake case format with optional `envPrefix` is expected.
+Lists and maps are reset, not appended.
+Format for lists is comma or semicolon separated string.
+For maps it's a list of key-value pairs separated by `=`.
+
+Lastly, options can be overwritten by command line arguments.
+The format is `--foo-bar` (lower kebab case) or `-x` for short options.
+Short options can be grouped (`-abc`).
+Boolean options should be either `--opt` for true and `--no-opt` for false.
+To provide a list, specify the same option multiple times.
+For map specify a list of key-value pairs separated by `=`.
+Special `_` option is automatically added, which contains a list of the rest of command line arguments.
 
 ## TODOs
 
