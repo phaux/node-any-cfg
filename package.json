@@ -1,6 +1,6 @@
 {
   "name": "any-cfg",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "author": "phaux <phaux4@gmail.com>",
   "description": "Config loader",
   "repository": "phaux/node-any-cfg",
