@@ -2,7 +2,8 @@
 
 [![Build Status](https://travis-ci.org/phaux/node-any-cfg.svg?branch=master)](https://travis-ci.org/phaux/node-any-cfg)
 
-[CHANGELOG](CHANGELOG.md)
+[CHANGELOG](CHANGELOG.md) |
+[DOCUMENTATION](https://phaux.github.io/node-any-cfg/modules/_index_.html#parse)
 
 Read program options from config files, environment variables and command line arguments.
 
