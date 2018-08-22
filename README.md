@@ -14,7 +14,7 @@ const {parse} = require('any-cfg')
 
 const options = parse({
   configDir: '.',
-  configFile: '.myapprc'
+  configFile: '.myapprc',
   envPrefix: 'MYAPP_',
   options: {
     HOST: {type: 'string', short: 'h'},
