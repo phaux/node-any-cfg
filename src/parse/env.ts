@@ -1,11 +1,11 @@
-import { Config, Options, parseValue, Result, Results } from "../common"
+import { Cfg, Mock, Opts, parseValue, Val, Vals } from "../common"
 
-export function parseEnvironment<O extends Options>(cfg: Config<O>): Results<O> {
+export function parseEnv<O extends Opts>(cfg: Cfg, opts: O, mock?: Mock['env']): Vals<O> {
 
-  const args = (cfg as any)._mockEnv || process.env
-  const results: {[option: string]: Result} = {}
+  const args = mock || process.env
+  const results: {[option: string]: Val} = {}
 
-  for (const [optName, opt] of Object.entries(cfg.options)) {
+  for (const [optName, opt] of Object.entries(opts)) {
     const envName = `${cfg.envPrefix || ''}${optName}`
     const envValue = args[envName]
     if (envValue == null) continue

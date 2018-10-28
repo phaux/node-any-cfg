@@ -1,139 +1,138 @@
-const {parse} = require('../lib/index.js')
+const {config} = require('../lib/index.js')
 const assert = require('assert')
 
 console.log('# Testing loading from evironment variables')
 
 console.log('Loads options')
 assert.deepEqual(
-  parse({
-    options: {
+  config()
+    .options({
       STR: {type: 'string'},
       NUM: {type: 'number'},
       BOOL: {type: 'boolean'},
-    },
-    _mockEnv: {
-      NUM: '42',
-      BOOL: 'off',
-    },
-    _mockArgs: [],
-  }),
+    }).parse({
+      env: {
+        NUM: '42',
+        BOOL: 'off',
+      },
+      args: [],
+    }),
   {
     _: [],
     NUM: 42,
     BOOL: false,
-  }
+  },
 )
 
 console.log('Loads list option')
 assert.deepEqual(
-  parse({
-    options: {
+  config()
+    .options({
       FOO: {type: 'list'},
-    },
-    _mockEnv: {
-      FOO: 'foo,bar,42',
-    },
-    _mockArgs: [],
-  }),
+    }).parse({
+      env: {
+        FOO: 'foo,bar,42',
+      },
+      args: [],
+    }),
   {
     _: [],
     FOO: ['foo', 'bar', '42'],
-  }
+  },
 )
 
 console.log('Loads map option')
 assert.deepEqual(
-  parse({
-    options: {
+  config()
+    .options({
       FOO: {type: 'map'},
-    },
-    _mockEnv: {
-      FOO: 'foo=bar,42=24',
-    },
-    _mockArgs: [],
-  }),
+    }).parse({
+      env: {
+        FOO: 'foo=bar,42=24',
+      },
+      args: [],
+    }),
   {
     _: [],
-    FOO: {'foo': 'bar', '42': '24'},
-  }
+    FOO: {foo: 'bar', 42: '24'},
+  },
 )
 
 console.log('Allows empty keys and values in map')
 assert.deepEqual(
-  parse({
-    options: {
+  config()
+    .options({
       FOO: {type: 'map'},
-    },
-    _mockEnv: {
-      FOO: 'a=b,=',
-    },
-    _mockArgs: [],
-  }),
+    }).parse({
+      env: {
+        FOO: 'a=b,=',
+      },
+      args: [],
+    }),
   {
     _: [],
     FOO: {'a': 'b', '': ''},
-  }
+  },
 )
 
 console.log('Throws on map key with no value')
 assert.throws(() =>
-  parse({
-    options: {
+  config()
+    .options({
       FOO: {type: 'map'},
-    },
-    _mockEnv: {
-      FOO: 'a=b,c',
-    },
-    _mockArgs: [],
-  })
+    }).parse({
+      env: {
+        FOO: 'a=b,c',
+      },
+      args: [],
+    }),
 )
 
 console.log('Loads options with envPrefix')
 assert.deepEqual(
-  parse({
-    envPrefix: 'TEST_',
-    options: {
+  config({envPrefix: 'TEST_'})
+    .options({
       STR: {type: 'string'},
       NUM: {type: 'number'},
       BOOL: {type: 'boolean'},
-    },
-    _mockEnv: {
-      TEST_STR: 'foobar',
-      TEST_NUM: '0.5',
-      TEST_BOOL: 'true',
-    },
-    _mockArgs: [],
-  }),
+    }).parse({
+      env: {
+        TEST_STR: 'foobar',
+        TEST_NUM: '0.5',
+        TEST_BOOL: 'true',
+      },
+      args: [],
+    }),
   {
     _: [],
     STR: 'foobar',
     NUM: 0.5,
     BOOL: true,
-  }
+  },
 )
 
 console.log('Throws on invalid boolean value')
 assert.throws(() => {
-  parse({
-    options: {
+  config()
+    .options({
       TEST: {type: 'boolean'},
-    },
-    _mockEnv: {
-      TEST: 'truee',
-    },
-    _mockArgs: [],
-  })
+    }).parse({
+      env: {
+        TEST: 'truee',
+      },
+      args: [],
+    })
 })
 
 console.log('Throws on invalid numeric value')
 assert.throws(() => {
-  parse({
-    options: {
+  config()
+    .options({
       TEST: {type: 'number'},
-    },
-    _mockEnv: {
-      TEST: '1234a',
-    },
-    _mockArgs: [],
-  })
+    }).parse({
+      env: {
+        TEST: '1234a',
+      },
+      args: [],
+    })
 })

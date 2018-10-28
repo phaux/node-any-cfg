@@ -2,8 +2,7 @@ import * as fs from 'fs'
 import * as p from 'path'
 // tslint:disable-next-line: no-var-requires no-require-imports
 const TOML = require('toml')
-import { Result, unreachable } from '../common'
-import { Config, Options, Results, TypeMap } from '../index'
+import { Cfg, Mock, Opts, Types, unreachable, Val, Vals } from '../common'
 
 type JSONValue = null | string | number | boolean | unknown[] | {[key: string]: unknown}
 
@@ -35,7 +34,7 @@ function readConfigFile(path: string, cfgFile?: string, mock?: any)
   return {config: {}, file: '<no_config>'}
 }
 
-function parseConfigValue(type: keyof TypeMap, value?: JSONValue): Result | undefined {
+function parseConfigValue(type: keyof Types, value?: JSONValue): Val | undefined {
   switch (type) {
     case 'map': {
       if (value == null || typeof value != 'object') throw Error(`Value is not an object`)
@@ -67,13 +66,13 @@ function parseConfigValue(type: keyof TypeMap, value?: JSONValue): Result | unde
   }
 }
 
-export function parseConfig<O extends Options>(cfg: Config<O>): Results<O> {
+export function parseConfig<O extends Opts>(cfg: Cfg, opts: O, mock?: Mock['config']): Vals<O> {
 
   const configDir = p.resolve(cfg.configDir != null ? cfg.configDir : '.')
-  const {config, file} = readConfigFile(configDir, cfg.configFile, (cfg as any)._mockConfig)
-  const results: {[option: string]: Result} = {}
+  const {config, file} = readConfigFile(configDir, cfg.configFile, mock)
+  const results: {[option: string]: Val} = {}
 
-  for (const [optName, opt] of Object.entries(cfg.options)) {
+  for (const [optName, opt] of Object.entries(opts)) {
     const configKey = optName.toLowerCase()
     if (config[configKey] == null) continue
     try {

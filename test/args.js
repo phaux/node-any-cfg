@@ -1,189 +1,188 @@
-const {parse} = require('../lib/index.js')
+const {config} = require('../lib/index.js')
 const assert = require('assert')
 
 console.log('# Testing loading from command line arguments')
 
 console.log('Loads options')
 assert.deepEqual(
-  parse({
-    options: {
+  config()
+    .options({
       STR_OPT: {type: 'string'},
       NUM_OPT: {type: 'number'},
       BOOL_OPT: {type: 'boolean'},
-    },
-    _mockEnv: {},
-    _mockArgs: ['--num-opt', '42', '--str-opt', 'foo'],
-  }),
+    }).parse({
+      env: {},
+      args: ['--num-opt', '42', '--str-opt', 'foo'],
+    }),
   {
     _: [],
     NUM_OPT: 42,
     STR_OPT: 'foo',
-  }
+  },
 )
 
 console.log('Loads rest options')
 assert.deepEqual(
-  parse({
-    options: {
+  config()
+    .options({
       TEST: {type: 'number'},
-    },
-    _mockEnv: {},
-    _mockArgs: ['foo', '--test', '123', 'bar', '--', '--baz'],
-  }),
+    }).parse({
+      env: {},
+      args: ['foo', '--test', '123', 'bar', '--', '--baz'],
+    }),
   {
     _: ['foo', 'bar', '--baz'],
     TEST: 123,
-  }
+  },
 )
 
 console.log('Loads list option')
 assert.deepEqual(
-  parse({
-    options: {
+  config()
+    .options({
       FOO: {type: 'list'},
-    },
-    _mockArgs: ['--foo', 'bar', '--foo', '42'],
-  }),
+    }).parse({
+      args: ['--foo', 'bar', '--foo', '42'],
+    }),
   {
     _: [],
     FOO: ['bar', '42'],
-  }
+  },
 )
 
 console.log('Loads map option')
 assert.deepEqual(
-  parse({
-    options: {
+  config()
+    .options({
       FOO: {type: 'map'},
-    },
-    _mockEnv: {},
-    _mockArgs: ['--foo', 'foo=bar', '--foo', '42=24'],
-  }),
+    }).parse({
+      env: {},
+      args: ['--foo', 'foo=bar', '--foo', '42=24'],
+    }),
   {
     _: [],
-    FOO: {'foo': 'bar', '42': '24'},
-  }
+    FOO: {foo: 'bar', 42: '24'},
+  },
 )
 
 console.log('Allows empty keys and values in map')
 assert.deepEqual(
-  parse({
-    options: {
+  config()
+    .options({
       FOO: {type: 'map'},
-    },
-    _mockEnv: {},
-    _mockArgs: ['--foo', '='],
-  }),
+    }).parse({
+      env: {},
+      args: ['--foo', '='],
+    }),
   {
     _: [],
     FOO: {'': ''},
-  }
+  },
 )
 
 console.log('Throws on map key with no value')
 assert.throws(() =>
-  parse({
-    options: {
+  config()
+    .options({
       FOO: {type: 'map'},
-    },
-    _mockEnv: {},
-    _mockArgs: ['--foo', 'bar'],
-  })
+    }).parse({
+      env: {},
+      args: ['--foo', 'bar'],
+    }),
 )
 
 console.log('Loads boolean options')
 assert.deepEqual(
-  parse({
-    options: {
+  config()
+    .options({
       OPT_A: {type: 'boolean'},
       OPT_B: {type: 'boolean'},
       OPT_C: {type: 'boolean'},
-    },
-    _mockEnv: {},
-    _mockArgs: ['--opt-a', '--no-opt-b'],
-  }),
+    }).parse({
+      env: {},
+      args: ['--opt-a', '--no-opt-b'],
+    }),
   {
     _: [],
     OPT_A: true,
     OPT_B: false,
-  }
+  },
 )
 
 console.log('Long negated boolean arg takes precedence')
 assert.deepEqual(
-  parse({
-    options: {
+  config()
+    .options({
       FOO: {type: 'boolean'},
       NO_FOO: {type: 'string'},
-    },
-    _mockEnv: {},
-    _mockArgs: ['--no-foo'],
-  }),
+    }).parse({
+      env: {},
+      args: ['--no-foo'],
+    }),
   {
     _: [],
     FOO: false,
-  }
+  },
 )
 
 console.log('Loads short options')
 assert.deepEqual(
-  parse({
-    options: {
+  config()
+    .options({
       BOOL_OPT: {type: 'boolean', short: 'b'},
       NUM_OPT: {type: 'number', short: 'n'},
-    },
-    _mockEnv: {},
-    _mockArgs: ['-bn', '123'],
-  }),
+    }).parse({
+      env: {},
+      args: ['-bn', '123'],
+    }),
   {
     _: [],
     BOOL_OPT: true,
     NUM_OPT: 123,
-  }
+  },
 )
 
 console.log('Throws on valueless short option')
 assert.throws(() =>
-  parse({
-    options: {
+  config()
+    .options({
       BOOL_OPT: {type: 'boolean', short: 'b'},
       NUM_OPT: {type: 'number', short: 'n'},
-    },
-    _mockEnv: {},
-    _mockArgs: ['-nb', '123'],
-  })
+    }).parse({
+      env: {},
+      args: ['-nb', '123'],
+    }),
 )
 
 console.log('Throws on unknown arg')
 assert.throws(() => {
-  parse({
-    options: {
+  config()
+    .options({
       TEST: {type: 'number'},
-    },
-    _mockEnv: {},
-    _mockArgs: ['--nope', '1'],
-  })
+    }).parse({
+      env: {},
+      args: ['--nope', '1'],
+    })
 })
 
 console.log('Throws on missing arg value')
 assert.throws(() => {
-  parse({
-    options: {
+  config()
+    .options({
       TEST: {type: 'number'},
-    },
-    _mockEnv: {},
-    _mockArgs: ['--test'],
-  })
+    }).parse({
+      env: {},
+      args: ['--test'],
+    })
 })
 
 console.log('Throws on invalid numeric value')
 assert.throws(() => {
-  parse({
-    options: {
+  config()
+    .options({
       TEST: {type: 'number'},
-    },
-    _mockEnv: {},
-    _mockArgs: ['--test', '123a'],
-  })
+    }).parse({
+      env: {},
+      args: ['--test', '123a'],
+    })
 })
-

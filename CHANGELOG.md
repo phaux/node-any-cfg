@@ -17,3 +17,8 @@
 - better docs
 - changed main function name to `parse` **(breaking change 💔)**
 - support for TOML and JSON config files
+
+# v0.9
+
+- changed API again **(breaking change 💔)**
+- print `.help("text" / "markdown")` to STDOUT

@@ -3,25 +3,40 @@
 [![Build Status](https://travis-ci.org/phaux/node-any-cfg.svg?branch=master)](https://travis-ci.org/phaux/node-any-cfg)
 
 [CHANGELOG](CHANGELOG.md) |
-[DOCUMENTATION](https://phaux.github.io/node-any-cfg/modules/_index_.html#parse)
+[DOCUMENTATION](https://phaux.github.io/node-any-cfg/modules/_index_.html#config)
 
 Read program options from config files, environment variables and command line arguments.
 
 ## Usage
 
 ```js
-const {parse} = require('any-cfg')
+const {config} = require('any-cfg')
 
-const options = parse({
+const cfg = config({
   configDir: '.',
   configFile: '.myapprc',
   envPrefix: 'MYAPP_',
-  options: {
-    HOST: {type: 'string', short: 'h'},
-    PORT: {type: 'number', short: 'p', required: true},
-    DEBUG: {type: 'boolean'},
-  },
 })
+.options({
+  HOST: {type: 'string', short: 'h'},
+  PORT: {type: 'number', short: 'p', required: true},
+  DEBUG: {type: 'boolean'},
+  HELP: {type: 'boolean'},
+})
+
+const {
+  HOST = 'localhost',
+  PORT,
+  DEBUG,
+  HELP,
+} = cfg.parse()
+
+if (HELP) {
+  cfg.help()
+  process.exit(0)
+}
+
+server.listen(PORT, HOST)
 ```
 
 ## Detailed usage
@@ -55,4 +70,5 @@ Special `_` option is automatically added, which contains a list of the rest of 
 - [x] Load config from env vars
 - [x] Load config from command line args
 - [x] Load config from JSON files
-- [ ] Generate help message
+- [x] Generate help message
+- [ ] 1.0

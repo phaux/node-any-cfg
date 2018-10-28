@@ -1,14 +1,14 @@
-import { Config, Options, parseValue, Rest, Result, Results, TypeMap, unreachable } from "../common"
+import { Mock, Opts, parseValue, Rest, Types, unreachable, Val, Vals } from "../common"
 
 function parseArg(
-  value: Result | undefined,
-  type: keyof TypeMap,
+  value: Val | undefined,
+  type: keyof Types,
   next: string | undefined,
   short: boolean,
   bool: boolean = true,
 ): {
   skip: boolean,
-  value: Result,
+  value: Val,
 } {
   if (type != 'boolean' && short) throw Error(`Can't appear in short option group`)
   switch (type) {
@@ -36,10 +36,10 @@ function parseArg(
   }
 }
 
-export function parseArguments<O extends Options>(cfg: Config<O>): Results<O> & Rest {
+export function parseArgs<O extends Opts>(opts: O, mock?: Mock['args']): Vals<O> & Rest {
 
-  const args = (cfg as any)._mockArgs || process.argv.slice(2)
-  const results: {[option: string]: Result} = {}
+  const args = mock || process.argv.slice(2)
+  const results: {[option: string]: Val} = {}
   let i = 0
   const rest: string[] = []
   while (i < args.length) {
@@ -55,11 +55,11 @@ export function parseArguments<O extends Options>(cfg: Config<O>): Results<O> & 
       const argName = arg.substr(2)
       let invert = !!argName.match(/^no-/i)
       let optName = argName.replace(/^no-/i, '').replace(/-/, '_').toUpperCase()
-      let opt = cfg.options[optName]
+      let opt = opts[optName]
       if (invert && (!opt || opt.type != 'boolean')) {
         invert = false
         optName = `NO_${optName}`
-        opt = cfg.options[optName]
+        opt = opts[optName]
       }
       if (!opt) throw Error(`Unknown argument: --${argName}`)
       try {
@@ -75,7 +75,7 @@ export function parseArguments<O extends Options>(cfg: Config<O>): Results<O> & 
     else if (arg.match(/^-./)) {
       for (let j = 1; j < arg.length; j += 1) {
         const argName = arg[j]
-        const [optName, opt] = Object.entries(cfg.options)
+        const [optName, opt] = Object.entries(opts)
           .find(([, opt]) => opt.short == argName) || ['', null]
         if (!opt) throw Error(`Unknown argument: -${argName}`)
         const last = j == arg.length - 1

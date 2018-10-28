@@ -1,35 +1,32 @@
-import { Config, Options, Rest, Result, Results } from "./common"
-import { parseArguments } from "./parse/args"
-import { parseConfig } from "./parse/config"
-import { parseEnvironment } from "./parse/env"
+import { Cfg, Format, Mock, Opts, parseAll, printHelp, Rest, Vals } from "./common"
 
-/**
- * Parse options from config files, environment variables and command line arguments
- * @param cfg The options object
- * @return Parsed options as key-value map + rest arguments from command line as special `_` option
- */
-export function parse<O extends Options>(cfg: Config<O>): Results<O> & Rest {
+class ParserOptions<O extends Opts> {
 
-  for (const optName of Object.keys(cfg.options)) {
-    if (optName.match(/[^A-Z_]/)) throw Error(`Option name "${optName}" is invalid`)
-  }
+  /** @ignore */
+  constructor(private readonly cfg: Cfg, private readonly opts: O) {}
 
-  const results: {[option: string]: Result} = {
-    ...parseConfig(cfg) as {},
-    ...parseEnvironment(cfg) as {},
-    ...parseArguments(cfg) as {},
-  }
+  /**
+   * Load options from config file, environment variables and command line arguments
+   * @return Object of options with their values
+   */
+  parse(mock: Mock = {}): Vals<O> & Rest {return parseAll(this.cfg, this.opts, mock)}
 
-  for (const [optName, opt] of Object.entries(cfg.options)) {
-    if (results[optName] == null) {
-      if (opt.required) throw Error(`Option ${optName} (${opt.type}) is required`)
-      else if (opt.type == 'list') results[optName] = []
-      else if (opt.type == 'map')  results[optName] = {}
-    }
-  }
-
-  return results as any
+  /** Prints help message to STDOUT. It's generated automatically based on the option definitions */
+  help(format: Format = 'text'): void {printHelp(this.cfg, this.opts, format)}
 
 }
 
-export {Config, Option, Options, Results, Rest, TypeMap} from './common'
+class ParserConfig {
+
+  /** @ignore */
+  constructor(private readonly cfg: Cfg = {}) {}
+
+  /** Provide option definitions to the parser */
+  options<O extends Opts>(opts: O): ParserOptions<O> {return new ParserOptions(this.cfg, opts)}
+
+}
+
+/** Initialize the config parser */
+export const config = (cfg: Cfg = {}): ParserConfig => new ParserConfig(cfg)
+
+export {Cfg, Opts}
