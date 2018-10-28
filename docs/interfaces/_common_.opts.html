@@ -3,17 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>any-cfg</title>
+	<title>Opts | any-cfg</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
 <body>
 <header>
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">any-cfg</a>
+					<a href="../index.html" class="title">any-cfg</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -51,92 +51,112 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="globals.html">Globals</a>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/_common_.html">&quot;common&quot;</a>
+				</li>
+				<li>
+					<a href="_common_.opts.html">Opts</a>
 				</li>
 			</ul>
-			<h1> any-cfg</h1>
+			<h1>Interface Opts</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<h1 id="any-cfg">any-cfg</h1>
-				<p><a href="https://travis-ci.org/phaux/node-any-cfg"><img src="https://travis-ci.org/phaux/node-any-cfg.svg?branch=master" alt="Build Status"></a></p>
-				<p><a href="CHANGELOG.md">CHANGELOG</a> |
-				<a href="https://phaux.github.io/node-any-cfg/modules/_index_.html#config">DOCUMENTATION</a></p>
-				<p>Read program options from config files, environment variables and command line arguments.</p>
-				<h2 id="usage">Usage</h2>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> {config} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'any-cfg'</span>)
-
-<span class="hljs-keyword">const</span> cfg = config({
-  <span class="hljs-attr">configDir</span>: <span class="hljs-string">'.'</span>,
-  <span class="hljs-attr">configFile</span>: <span class="hljs-string">'.myapprc'</span>,
-  <span class="hljs-attr">envPrefix</span>: <span class="hljs-string">'MYAPP_'</span>,
-})
-.options({
-  <span class="hljs-attr">HOST</span>: {<span class="hljs-attr">type</span>: <span class="hljs-string">'string'</span>, <span class="hljs-attr">short</span>: <span class="hljs-string">'h'</span>},
-  <span class="hljs-attr">PORT</span>: {<span class="hljs-attr">type</span>: <span class="hljs-string">'number'</span>, <span class="hljs-attr">short</span>: <span class="hljs-string">'p'</span>, <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>},
-  <span class="hljs-attr">DEBUG</span>: {<span class="hljs-attr">type</span>: <span class="hljs-string">'boolean'</span>},
-  <span class="hljs-attr">HELP</span>: {<span class="hljs-attr">type</span>: <span class="hljs-string">'boolean'</span>},
-})
-
-<span class="hljs-keyword">const</span> opts = cfg.parse()
-
-<span class="hljs-keyword">if</span> (opts.HELP) {
-  cfg.help()
-  process.exit(<span class="hljs-number">0</span>)
-}
-
-server.listen(opts.PORT, opts.HOST)</code></pre>
-				<h2 id="detailed-usage">Detailed usage</h2>
-				<p>Specify options using format <code>FOO_BAR</code> (upper snake case).
-					Each option can have type, required flag and short name.
-					Supported types are: <strong>string</strong>, <strong>number</strong>, <strong>boolean</strong>,
-				<strong>list</strong> (array of strings) and <strong>map</strong> (object of strings).</p>
-				<p>First, options will be read from config files starting from <code>configDir</code> and going upwards.
-					First file with basename <code>configFile</code> will be parsed.
-					It must include an extension (either <code>.json</code> or <a href="https://github.com/toml-lang/toml"><code>.toml</code></a>).
-				Parser expects options to be formatted as <code>foo_bar</code> (lower snake case).</p>
-				<p>Then, options can be overwritten by environment variables.
-					Upper snake case format with optional <code>envPrefix</code> is expected.
-					Lists and maps are reset, not appended.
-					Format for lists is comma or semicolon separated string.
-				For maps it&#39;s a list of key-value pairs separated by <code>=</code>.</p>
-				<p>Lastly, options can be overwritten by command line arguments.
-					The format is <code>--foo-bar</code> (lower kebab case) or <code>-x</code> for short options.
-					Short options can be grouped (<code>-abc</code>).
-					Boolean options should be either <code>--opt</code> for true and <code>--no-opt</code> for false.
-					To provide a list, specify the same option multiple times.
-					For map specify a list of key-value pairs separated by <code>=</code>.
-				Special <code>_</code> option is automatically added, which contains a list of the rest of command line arguments.</p>
-				<h2 id="todos">TODOs</h2>
-				<ul>
-					<li><input checked="" disabled="" type="checkbox"> Load config from env vars</li>
-					<li><input checked="" disabled="" type="checkbox"> Load config from command line args</li>
-					<li><input checked="" disabled="" type="checkbox"> Load config from JSON files</li>
-					<li><input checked="" disabled="" type="checkbox"> Generate help message</li>
-					<li><input disabled="" type="checkbox"> 1.0</li>
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Option definitions</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">Opts</span>
+					</li>
 				</ul>
-			</div>
+			</section>
+			<section class="tsd-panel tsd-kind-interface tsd-parent-kind-external-module">
+				<h3 class="tsd-before-signature">Indexable</h3>
+				<div class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">[</span>opt: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="_common_.opt.html" class="tsd-signature-type">Opt</a></div>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Option definitions</p>
+					</div>
+				</div>
+			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/_common_.html">"common"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_common_.html">"common"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_index_.html">"index"</a>
+						<a href="../modules/_index_.html">"index"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_common_.cfg.html" class="tsd-kind-icon">Cfg</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_common_.mock.html" class="tsd-kind-icon">Mock</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_common_.opt.html" class="tsd-kind-icon">Opt</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_common_.opts.html" class="tsd-kind-icon">Opts</a>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_common_.rest.html" class="tsd-kind-icon">Rest</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_common_.types.html" class="tsd-kind-icon">Types</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="../modules/_common_.html#format" class="tsd-kind-icon">Format</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="../modules/_common_.html#val" class="tsd-kind-icon">Val</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../modules/_common_.html#vals" class="tsd-kind-icon">Vals</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_common_.html#falsy_vals" class="tsd-kind-icon">FALSY_<wbr>VALS</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_common_.html#truthy_vals" class="tsd-kind-icon">TRUTHY_<wbr>VALS</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../modules/_common_.html#parseall" class="tsd-kind-icon">parse<wbr>All</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/_common_.html#parsevalue" class="tsd-kind-icon">parse<wbr>Value</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../modules/_common_.html#printhelp" class="tsd-kind-icon">print<wbr>Help</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/_common_.html#unreachable" class="tsd-kind-icon">unreachable</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -205,7 +225,7 @@ server.listen(opts.PORT, opts.HOST)</code></pre>
 	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

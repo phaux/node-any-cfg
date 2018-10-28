@@ -71,18 +71,20 @@
 						<section class="tsd-index-section ">
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter"><a href="../interfaces/_common_.config.html" class="tsd-kind-icon">Config</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_common_.option.html" class="tsd-kind-icon">Option</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_common_.options.html" class="tsd-kind-icon">Options</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_common_.cfg.html" class="tsd-kind-icon">Cfg</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_common_.mock.html" class="tsd-kind-icon">Mock</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_common_.opt.html" class="tsd-kind-icon">Opt</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_common_.opts.html" class="tsd-kind-icon">Opts</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_common_.rest.html" class="tsd-kind-icon">Rest</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_common_.typemap.html" class="tsd-kind-icon">Type<wbr>Map</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_common_.types.html" class="tsd-kind-icon">Types</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_common_.html#result" class="tsd-kind-icon">Result</a></li>
-								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_common_.html#results" class="tsd-kind-icon">Results</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_common_.html#format" class="tsd-kind-icon">Format</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_common_.html#val" class="tsd-kind-icon">Val</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_common_.html#vals" class="tsd-kind-icon">Vals</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-not-exported">
@@ -95,7 +97,9 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_common_.html#parseall" class="tsd-kind-icon">parse<wbr>All</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_common_.html#parsevalue" class="tsd-kind-icon">parse<wbr>Value</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_common_.html#printhelp" class="tsd-kind-icon">print<wbr>Help</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_common_.html#unreachable" class="tsd-kind-icon">unreachable</a></li>
 							</ul>
 						</section>
@@ -105,24 +109,44 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Type aliases</h2>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
-					<a name="result" class="tsd-anchor"></a>
-					<h3>Result</h3>
-					<div class="tsd-signature tsd-kind-icon">Result<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></div>
+					<a name="format" class="tsd-anchor"></a>
+					<h3>Format</h3>
+					<div class="tsd-signature tsd-kind-icon">Format<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"markdown"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"text"</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/phaux/node-any-cfg/blob/db0d6c4/src/common.ts#L31">common.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/phaux/node-any-cfg/blob/caf1e1f/src/common.ts#L128">common.ts:128</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Help message format</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
+					<a name="val" class="tsd-anchor"></a>
+					<h3>Val</h3>
+					<div class="tsd-signature tsd-kind-icon">Val<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/phaux/node-any-cfg/blob/caf1e1f/src/common.ts#L48">common.ts:48</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
-					<a name="results" class="tsd-anchor"></a>
-					<h3>Results</h3>
-					<div class="tsd-signature tsd-kind-icon">Results<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<a name="vals" class="tsd-anchor"></a>
+					<h3>Vals</h3>
+					<div class="tsd-signature tsd-kind-icon">Vals<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/phaux/node-any-cfg/blob/db0d6c4/src/common.ts#L35">common.ts:35</a></li>
+							<li>Defined in <a href="https://github.com/phaux/node-any-cfg/blob/caf1e1f/src/common.ts#L54">common.ts:54</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Parsed values</p>
+						</div>
+					</div>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
@@ -138,7 +162,7 @@
 					<div class="tsd-signature tsd-kind-icon">FALSY_<wbr>VALS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[&#x27;&#x27;, &#x27;0&#x27;, &#x27;off&#x27;, &#x27;false&#x27;]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/phaux/node-any-cfg/blob/db0d6c4/src/common.ts#L44">common.ts:44</a></li>
+							<li>Defined in <a href="https://github.com/phaux/node-any-cfg/blob/caf1e1f/src/common.ts#L66">common.ts:66</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -148,36 +172,118 @@
 					<div class="tsd-signature tsd-kind-icon">TRUTHY_<wbr>VALS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[&#x27;1&#x27;, &#x27;on&#x27;, &#x27;true&#x27;]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/phaux/node-any-cfg/blob/db0d6c4/src/common.ts#L43">common.ts:43</a></li>
+							<li>Defined in <a href="https://github.com/phaux/node-any-cfg/blob/caf1e1f/src/common.ts#L65">common.ts:65</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="parsevalue" class="tsd-anchor"></a>
-					<h3>parse<wbr>Value</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">parse<wbr>Value<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">keyof TypeMap</span>, str<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_common_.html#result" class="tsd-signature-type">Result</a></li>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+					<a name="parseall" class="tsd-anchor"></a>
+					<h3>parse<wbr>All</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>All&lt;O&gt;<span class="tsd-signature-symbol">(</span>cfg<span class="tsd-signature-symbol">: </span><a href="../interfaces/_common_.cfg.html" class="tsd-signature-type">Cfg</a>, opts<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">O</span>, mock<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_common_.mock.html" class="tsd-signature-type">Mock</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_common_.html#vals" class="tsd-signature-type">Vals</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="../interfaces/_common_.rest.html" class="tsd-signature-type">Rest</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/phaux/node-any-cfg/blob/db0d6c4/src/common.ts#L45">common.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/phaux/node-any-cfg/blob/caf1e1f/src/common.ts#L105">common.ts:105</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Parse options from config files, environment variables and command line arguments</p>
+								</div>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>O<span class="tsd-signature-symbol">: </span><a href="../interfaces/_common_.opts.html" class="tsd-signature-type">Opts</a></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>cfg: <a href="../interfaces/_common_.cfg.html" class="tsd-signature-type">Cfg</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The options object</p>
+									</div>
+								</li>
+								<li>
+									<h5>opts: <span class="tsd-signature-type">O</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> mock: <a href="../interfaces/_common_.mock.html" class="tsd-signature-type">Mock</a><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_common_.html#vals" class="tsd-signature-type">Vals</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol">&gt;</span>
+								<span class="tsd-signature-symbol"> &amp; </span>
+								<a href="../interfaces/_common_.rest.html" class="tsd-signature-type">Rest</a>
+							</h4>
+							<p>Parsed options as key-value map + rest arguments from command line as special <code>_</code> option</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="parsevalue" class="tsd-anchor"></a>
+					<h3>parse<wbr>Value</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Value<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">keyof Types</span>, str<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_common_.html#val" class="tsd-signature-type">Val</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/phaux/node-any-cfg/blob/caf1e1f/src/common.ts#L67">common.ts:67</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>type: <span class="tsd-signature-type">keyof TypeMap</span></h5>
+									<h5>type: <span class="tsd-signature-type">keyof Types</span></h5>
 								</li>
 								<li>
 									<h5>str: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_common_.html#result" class="tsd-signature-type">Result</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_common_.html#val" class="tsd-signature-type">Val</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+					<a name="printhelp" class="tsd-anchor"></a>
+					<h3>print<wbr>Help</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">print<wbr>Help&lt;O&gt;<span class="tsd-signature-symbol">(</span>cfg<span class="tsd-signature-symbol">: </span><a href="../interfaces/_common_.cfg.html" class="tsd-signature-type">Cfg</a>, opts<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">O</span>, format<span class="tsd-signature-symbol">?: </span><a href="_common_.html#format" class="tsd-signature-type">Format</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/phaux/node-any-cfg/blob/caf1e1f/src/common.ts#L130">common.ts:130</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>O<span class="tsd-signature-symbol">: </span><a href="../interfaces/_common_.opts.html" class="tsd-signature-type">Opts</a></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>cfg: <a href="../interfaces/_common_.cfg.html" class="tsd-signature-type">Cfg</a></h5>
+								</li>
+								<li>
+									<h5>opts: <span class="tsd-signature-type">O</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> format: <a href="_common_.html#format" class="tsd-signature-type">Format</a><span class="tsd-signature-symbol"> =&nbsp;&quot;text&quot;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -191,7 +297,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/phaux/node-any-cfg/blob/db0d6c4/src/common.ts#L39">common.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/phaux/node-any-cfg/blob/caf1e1f/src/common.ts#L61">common.ts:61</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -225,26 +331,32 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../interfaces/_common_.config.html" class="tsd-kind-icon">Config</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_common_.cfg.html" class="tsd-kind-icon">Cfg</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_common_.option.html" class="tsd-kind-icon">Option</a>
+						<a href="../interfaces/_common_.mock.html" class="tsd-kind-icon">Mock</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_common_.options.html" class="tsd-kind-icon">Options</a>
+						<a href="../interfaces/_common_.opt.html" class="tsd-kind-icon">Opt</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_common_.opts.html" class="tsd-kind-icon">Opts</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="../interfaces/_common_.rest.html" class="tsd-kind-icon">Rest</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_common_.typemap.html" class="tsd-kind-icon">Type<wbr>Map</a>
+						<a href="../interfaces/_common_.types.html" class="tsd-kind-icon">Types</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="_common_.html#result" class="tsd-kind-icon">Result</a>
+						<a href="_common_.html#format" class="tsd-kind-icon">Format</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="_common_.html#val" class="tsd-kind-icon">Val</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="_common_.html#results" class="tsd-kind-icon">Results</a>
+						<a href="_common_.html#vals" class="tsd-kind-icon">Vals</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="_common_.html#falsy_vals" class="tsd-kind-icon">FALSY_<wbr>VALS</a>
@@ -252,8 +364,14 @@
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="_common_.html#truthy_vals" class="tsd-kind-icon">TRUTHY_<wbr>VALS</a>
 					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="_common_.html#parseall" class="tsd-kind-icon">parse<wbr>All</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_common_.html#parsevalue" class="tsd-kind-icon">parse<wbr>Value</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="_common_.html#printhelp" class="tsd-kind-icon">print<wbr>Help</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_common_.html#unreachable" class="tsd-kind-icon">unreachable</a>
