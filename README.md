@@ -1,5 +1,6 @@
 # any-cfg
 
+[![npm](https://img.shields.io/npm/v/any-cfg.svg)](https://www.npmjs.com/package/any-cfg)
 [![Build Status](https://travis-ci.org/phaux/node-any-cfg.svg?branch=master)](https://travis-ci.org/phaux/node-any-cfg)
 
 [CHANGELOG](CHANGELOG.md) |
