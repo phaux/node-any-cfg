@@ -1,10 +1,15 @@
-# v0.6
+# 0.9.0
 
-- initial version with basic functionality 🎉
-- types: `string`, `number` and `boolean`
-- parsing command line arguments and environment variables
+- changed API again **(breaking change 💔)**
+- print `.help("text" / "markdown")` to STDOUT
 
-# v0.7
+# 0.8.0
+
+- better docs
+- changed main function name to `parse` **(breaking change 💔)**
+- support for TOML and JSON config files
+
+# 0.7.0
 
 - better typescript support
 - new types: `list` and `map`
@@ -12,13 +17,8 @@
 - function now returns simple map of option names to values **(breaking change 💔)**
 - rest arguments from command line are represented as as special `_` option
 
-# v0.8
+# 0.6.0
 
-- better docs
-- changed main function name to `parse` **(breaking change 💔)**
-- support for TOML and JSON config files
-
-# v0.9
-
-- changed API again **(breaking change 💔)**
-- print `.help("text" / "markdown")` to STDOUT
+- initial version with basic functionality 🎉
+- types: `string`, `number` and `boolean`
+- parsing command line arguments and environment variables
