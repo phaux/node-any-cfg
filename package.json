@@ -10,20 +10,70 @@
     "loader"
   ],
   "main": "lib",
-  "typings": "lib",
+  "types": "lib",
   "scripts": {
     "docs": "typedoc --out docs --exclude '**/parse/*.ts' --excludeExternals --excludePrivate",
-    "prepare": "tsc -p . -m commonjs -t es2017 --outDir lib",
-    "prepublishOnly": "npm test",
-    "test": "tslint -p . && node test"
+    "prepare": "tsc",
+    "test": "run-s test:*",
+    "test:eslint": "eslint --ext js,ts .",
+    "test:prettier": "prettier --check \"**/*.{js,ts,json,md}\"",
+    "test:tsc": "tsc --noEmit",
+    "test:jest": "jest --coverage"
+  },
+  "files": [
+    "lib"
+  ],
+  "jest": {
+    "preset": "ts-jest",
+    "globals": {
+      "ts-jest": {
+        "babelConfig": {
+          "plugins": [
+            "@babel/plugin-proposal-nullish-coalescing-operator"
+          ]
+        }
+      }
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm test"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,json,md}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{js,ts}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "printWidth": 100,
+    "semi": false,
+    "trailingComma": "es5"
   },
   "devDependencies": {
-    "@types/node": "^10.12.0",
-    "tslint": "^5.11.0",
-    "typedoc": "^0.13.0",
-    "typescript": "^3.1.3"
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.7.4",
+    "@types/jest": "^24.0.25",
+    "@types/node": "^13.1.2",
+    "@typescript-eslint/eslint-plugin": "^2.14.0",
+    "@typescript-eslint/parser": "^2.14.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
+    "husky": "^3.1.0",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.5.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.19.1",
+    "ts-jest": "^24.2.0",
+    "typedoc": "^0.15.6",
+    "typescript": "^3.7.4"
   },
   "dependencies": {
-    "toml": "^2.3.3"
+    "toml": "^3.0.0"
   }
 }

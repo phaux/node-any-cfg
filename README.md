@@ -1,7 +1,8 @@
 # any-cfg
 
-[![npm](https://img.shields.io/npm/v/any-cfg.svg)](https://www.npmjs.com/package/any-cfg)
-[![Build Status](https://travis-ci.org/phaux/node-any-cfg.svg?branch=master)](https://travis-ci.org/phaux/node-any-cfg)
+[![Travis](https://img.shields.io/travis/phaux/node-any-cfg)](https://travis-ci.org/phaux/node-any-cfg)
+[![Codecov](https://img.shields.io/codecov/c/gh/phaux/node-any-cfg)](https://codecov.io/gh/phaux/node-any-cfg)
+[![npm](https://img.shields.io/npm/v/any-cfg)](https://www.npmjs.com/package/any-cfg)
 
 [CHANGELOG](CHANGELOG.md) |
 [DOCUMENTATION](https://phaux.github.io/node-any-cfg/modules/_index_.html#config)
@@ -11,26 +12,20 @@ Read program options from config files, environment variables and command line a
 ## Usage
 
 ```js
-const {config} = require('any-cfg')
+const { config } = require("any-cfg")
 
 const cfg = config({
-  configDir: '.',
-  configFile: '.myapprc',
-  envPrefix: 'MYAPP_',
-})
-.options({
-  HOST: {type: 'string', short: 'h'},
-  PORT: {type: 'number', short: 'p', required: true},
-  DEBUG: {type: 'boolean'},
-  HELP: {type: 'boolean'},
+  configDir: ".",
+  configFile: ".myapprc",
+  envPrefix: "MYAPP_",
+}).options({
+  HOST: { type: "string", short: "h" },
+  PORT: { type: "number", short: "p", required: true },
+  DEBUG: { type: "boolean" },
+  HELP: { type: "boolean" },
 })
 
-const {
-  HOST = 'localhost',
-  PORT,
-  DEBUG,
-  HELP,
-} = cfg.parse()
+const { HOST = "localhost", PORT, DEBUG, HELP } = cfg.parse()
 
 if (HELP) {
   cfg.help()

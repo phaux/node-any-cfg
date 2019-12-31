@@ -1,14 +1,12 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "lib": ["esnext"],
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "pretty": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext"],
+    "module": "CommonJS",
+    "outDir": "lib",
     "strict": true,
-    "target": "esnext"
+    "target": "ESNext"
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src"]
 }

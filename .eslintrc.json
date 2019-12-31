@@ -1,0 +1,39 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "prettier",
+    "prettier/@typescript-eslint"
+  ],
+  "parserOptions": {
+    "createDefaultProgram": true,
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/member-ordering": "error",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-floating-promises": ["error", { "ignoreVoid": true }],
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/prefer-readonly": "error",
+    "@typescript-eslint/prefer-regexp-exec": "off",
+    "@typescript-eslint/promise-function-async": "error",
+    "@typescript-eslint/restrict-plus-operands": "error",
+    "@typescript-eslint/restrict-template-expressions": ["error", { "allowNumber": true }],
+    "@typescript-eslint/strict-boolean-expressions": "error",
+    "eqeqeq": ["error", "smart"],
+    "no-else-return": "error",
+    "no-extra-boolean-cast": "off",
+    "no-implicit-coercion": "error",
+    "require-unicode-regexp": "error",
+    "yoda": "error"
+  }
+}
